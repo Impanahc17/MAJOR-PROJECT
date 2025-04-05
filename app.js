@@ -31,6 +31,13 @@ const listings = require("./routes/listings.js");
 const reviews = require("./routes/reviews.js")
 const userRouter = require("./routes/user.js");
 
+const dbUrl = process.env.ATLASDB_URL;
+
+async function main() {
+    await mongoose.connect(dbUrl);
+    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+  }
+
 const store = Mongostore.create({
     mongoUrl : dbUrl,
     crypto :{
@@ -77,7 +84,7 @@ app.use((req,res,next)=>{
     next();
    });
 
-const dbUrl = process.env.ATLASDB_URL;
+
 // const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
 
 main().then(() =>{
